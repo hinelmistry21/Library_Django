@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Books App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:#ffffff;">
+<nav class="navbar navbar-light" style="background-color:#b5def7;">
+    <a href="#" class="navbar-brand" style="height:70%;width:60%;border-spacing:30px;border-radius:5px;font-size:xx-large;font-weight:bolder;color:#4033b8;">
+        <img width="10%" height="20%" src = "{% static 'images/book.png' %}"> Athen<span style="color:white;">aeum</span>
+        </a>
+    <a class="navbar-link " href="{% url 'index' %}" style="font-size:x-large;font-weight: bolder;color:#6e6b6b;">Library</a>
+<a href="{% url 'admin:index' %}" class = 'navbar-link ' style="font-size:x-large;font-weight: bolder;color:#6e6b6b;">Admin</a>
+    <a href="{% url 'upload-book' %}" class="navbar-link " style="font-size:x-large;font-weight: bolder;color:#6e6b6b;">Upload Books</a>
+</nav>
+<br>
+{% block content %}
+<div class="card-columns">
+    {% for book in shelf %}
+    <div class="card" style="width: 18rem; ">
+  <img class="card-img-top" src="{{ book.picture.url }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ book.name }}</h5>
+    <p class="card-text">{{ book.describe }}</p>
+   <div class="card-footer bg-transparent border-dark">
+   <p class="card-title">{{book.author}}</p>
+   <center>
+       <a href="update/{{book.id}}" class="btn btn-warning" id = '{{book.id}}'>edit</a>
+       <a href="delete/{{book.id}}" class="btn btn-danger" id = '{{book.id}}'>delete</a>
+    </center>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
